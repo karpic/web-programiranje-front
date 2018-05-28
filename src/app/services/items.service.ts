@@ -1,3 +1,4 @@
+import { ItemCreation } from './../models/itemCreation.model';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -16,12 +17,35 @@ const httpOptions = {
 @Injectable()
 export class ItemsService {
   private url = 'http://localhost:8080/webproject/webapi/items';
-  private urlTop = 'http://localhost:8080/webproject/webapi/items/top'
+  private urlTop = 'http://localhost:8080/webproject/webapi/items/top';
+  private deleteUrl = 'http://localhost:8080/webproject/webapi/items/delete';
 
   getTopTen(): Observable<ItemView[]> {
     return this.http.get<ItemView[]>(this.urlTop, httpOptions).pipe(
       catchError(this.handleError<any>('getTopTen'))
     )
+  }
+
+  getAll(): Observable<ItemView[]> {
+    return this.http.get<ItemView[]>(this.url, httpOptions).pipe(
+      catchError(this.handleError<any>('getAll'))
+    )
+  }
+
+  insertItem(item: ItemCreation) {
+    return this.http.post<ItemCreation>(this.url, item, httpOptions).pipe(
+      catchError(this.handleError<ItemCreation>('insertItem'))
+    );
+  }
+
+  deleteItem(item: ItemView | number): Observable<ItemView> {
+    const id = typeof item === 'number' ? item : item.id;
+    const url = `${this.deleteUrl}/${id}`;
+    console.log(url);
+
+    return this.http.delete<ItemView>(url, httpOptions).pipe(
+      catchError(this.handleError<ItemView>('deleteItem'))
+    );
   }
 
 

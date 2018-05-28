@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { UserCreation } from '../../models/userCreation.model';
 
 const TOKEN_KEY = 'AuthToken';
+const ROLE_KEY = 'userRole';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -42,6 +43,17 @@ export class AuthService {
       this.isLoggedIn = false;
       this.change.emit(this.isLoggedIn);
     }
+  }
+
+  getUserRole(): string {
+    return window.sessionStorage.getItem(ROLE_KEY);
+  }
+
+  isAdmin(): Observable<boolean> {
+    if(window.sessionStorage.getItem(ROLE_KEY) == 'ADMIN'){
+      return of(true);
+    }
+    return of(false);
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-lg-7">
+      <br>
+      <a class="list-group-item clearfix" *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: p }">
+          <div class="pull-left">
+            <h4 class="list-group-item-heading">Item name: <b>{{item.name}}</b></h4>
+            <p class="list-group-item-text">Description: <b>{{item.description}}</b></p>
+            <p class="list-group-item-text">Type: <b>{{item.type}}</b></p>
+            <p class="list-group-item-text">Quantity: <b>{{item.quantity}}</b></p>
+          </div>
+          <div class="pull-right">
+            <button class="btn btn-primary">Update</button>
+            <button class="btn btn-danger" (click)="deleteItem(item)" *ngIf="!item.deleted">Delete</button>
+          </div>
+        </a>
+
+        <br>
+        <pagination-controls class="myPagination center" (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+  <div class="col-lg-5">
+    <h3>Create new item</h3>
+    <form #newItemForm="ngForm" (ngSubmit)="onNewItemSubmit(newItemForm)" class="form-signin">
+      <div class="form-group">
+        <label for="name">Item name</label>
+        <input type="text" id="name" name="name" class="form-control" required autofocus ngModel #nameRef="ngModel">
+        <span class="help-block" *ngIf="!nameRef.valid && nameRef.touched">Name is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" id="description" name="description" class="form-control" required ngModel #descriptionRef="ngModel">
+        <span class="help-block" *ngIf="!descriptionRef.valid && descriptionRef.touched">Description is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price" class="form-control" required ngModel #priceRef="ngModel">
+        <span class="help-block" *ngIf="!priceRef.valid && priceRef.touched">Price is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <!-- <input type="text" id="description" name="description" class="form-control" required ngModel #descriptionRef="ngModel"> -->
+        <select name="type" id="type" class="form-control" [(ngModel)]="newItem.type">
+          <option value="DISH">Dish</option>
+          <option value="DRINK">Drink</option>
+        </select>
+        <!-- <span class="help-block" *ngIf="!descriptionRef.valid && descriptionRef.touched">Description is required!</span> -->
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity" class="form-control" required ngModel #quantityRef="ngModel">
+        <span class="help-block" *ngIf="!quantityRef.valid && quantityRef.touched">Quantity is required!</span>
+      </div>
+
+      <div class="form-group">
+          <label for="restaurant">Restaurant</label>
+          <select name="restaurant" id="restaurant" class="form-control" [(ngModel)]="newItem.restaurantId">
+            <option *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.name}}</option>
+          </select>
+        </div>
+
+      <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!newItemForm.valid">Sumbit</button>
+      <button class="btn btn-lg btn-danger btn-block" routerLink="/">Cancel</button>
+    </form>
+  </div>
+</div>

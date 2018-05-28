@@ -7,6 +7,7 @@ export class ItemView {
     public type: string,
     public quantity: number,
     public timesOrdered: number,
-    public deleted: boolean
+    public deleted: boolean,
+    public restaurantId: number
   ) {}
 }

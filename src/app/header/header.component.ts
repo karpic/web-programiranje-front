@@ -11,6 +11,8 @@ const TOKEN_KEY = 'AuthToken';
 })
 export class HeaderComponent implements OnInit {
   loggedIn: boolean;
+  role: string;
+  isAdmin: boolean;
 
   constructor(
     private authService: AuthService,
@@ -20,9 +22,17 @@ export class HeaderComponent implements OnInit {
   logout() {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.removeItem('username');
+    window.sessionStorage.removeItem('userRole');
     window.sessionStorage.clear();
     this.authService.toggleLoggedIn();
+    this.isAdmin = false;
     this.router.navigate(['login']);
+  }
+
+  checkIfAdmin() {
+    this.authService.isAdmin().subscribe(
+      isAdmin => this.isAdmin = isAdmin
+    );
   }
 
   ngOnInit() {
@@ -34,6 +44,9 @@ export class HeaderComponent implements OnInit {
       this.loggedIn = isLoggedIn;
       console.log(this.loggedIn)
     });
+
+    this.checkIfAdmin();
+
   }
 
 }

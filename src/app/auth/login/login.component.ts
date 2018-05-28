@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
         console.log("Token: " + data.token);
         this.authService.toggleLoggedIn();
         window.sessionStorage.setItem('username', data.username);
+        window.sessionStorage.setItem('userRole', data.role);
         this.router.navigate(['/home']);
       }
     )

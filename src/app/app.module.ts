@@ -16,7 +16,12 @@ import { AuthService } from './services/auth/auth.service';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { ItemsService } from './services/items.service';
 import { ItemComponent } from './welcome-page/item/item.component';
-
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { NewItemComponent } from './admin-panel/new-item/new-item.component';
+import { RestaurantsService } from './services/restaurants.service';
+import { ItemsResolver } from './resolvers/items.resolver';
+import { RestaurantsResolver } from './resolvers/restaurants.resolver';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -25,20 +30,26 @@ import { ItemComponent } from './welcome-page/item/item.component';
     LoginComponent,
     RegisterComponent,
     WelcomePageComponent,
-    ItemComponent
+    ItemComponent,
+    AdminPanelComponent,
+    NewItemComponent,
   ],
   imports: [
     FormsModule,
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [
     UsersService,
     AuthService,
     TokenStorage,
     TopTenItemsResolver,
-    ItemsService
+    ItemsService,
+    RestaurantsService,
+    ItemsResolver,
+    RestaurantsResolver
   ],
   bootstrap: [AppComponent]
 })
