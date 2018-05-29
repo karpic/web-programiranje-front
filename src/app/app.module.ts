@@ -22,6 +22,9 @@ import { RestaurantsService } from './services/restaurants.service';
 import { ItemsResolver } from './resolvers/items.resolver';
 import { RestaurantsResolver } from './resolvers/restaurants.resolver';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { UpdateItemComponent } from './admin-panel/update-item/update-item.component';
+import { NewRestaurantComponent } from './admin-panel/new-restaurant/new-restaurant.component';
+import { UpdateRestaurantComponent } from './admin-panel/update-restaurant/update-restaurant.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ItemComponent,
     AdminPanelComponent,
     NewItemComponent,
+    UpdateItemComponent,
+    NewRestaurantComponent,
+    UpdateRestaurantComponent,
   ],
   imports: [
     FormsModule,

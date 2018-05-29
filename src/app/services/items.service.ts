@@ -19,6 +19,7 @@ export class ItemsService {
   private url = 'http://localhost:8080/webproject/webapi/items';
   private urlTop = 'http://localhost:8080/webproject/webapi/items/top';
   private deleteUrl = 'http://localhost:8080/webproject/webapi/items/delete';
+  private updateUrl = 'http://localhost:8080/webproject/webapi/items/update';
 
   getTopTen(): Observable<ItemView[]> {
     return this.http.get<ItemView[]>(this.urlTop, httpOptions).pipe(
@@ -45,6 +46,14 @@ export class ItemsService {
 
     return this.http.delete<ItemView>(url, httpOptions).pipe(
       catchError(this.handleError<ItemView>('deleteItem'))
+    );
+  }
+
+  updatePonuda(item: ItemView): Observable<ItemView>{
+    //const id = typeof ponuda === 'string' ? ponuda : ponuda.id;
+    //const url = `${this.url}/${id}`;
+    return this.http.put<ItemView>(this.updateUrl, item, httpOptions).pipe(
+      catchError(this.handleError<ItemView>('updatePonuda'))
     );
   }
 

@@ -1,0 +1,52 @@
+<div class="col-lg-5" *ngIf="!success">
+  <h3>Update item</h3>
+  <form #updateItemForm="ngForm" (ngSubmit)="onUpdateItem(updateItemForm)" class="form-signin">
+    <div class="form-group">
+      <label for="name">Item name</label>
+      <input type="text" id="name" name="name" class="form-control" required autofocus ngModel #nameRef="ngModel" [(ngModel)]="itemToUpdate.name">
+      <span class="help-block" *ngIf="!nameRef.valid && nameRef.touched">Name is required!</span>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input type="text" id="description" name="description" class="form-control" required ngModel #descriptionRef="ngModel" [(ngModel)]="itemToUpdate.description">
+      <span class="help-block" *ngIf="!descriptionRef.valid && descriptionRef.touched">Description is required!</span>
+    </div>
+
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" id="price" name="price" class="form-control" required ngModel #priceRef="ngModel" [(ngModel)]="itemToUpdate.price">
+      <span class="help-block" *ngIf="!priceRef.valid && priceRef.touched">Price is required!</span>
+    </div>
+
+    <div class="form-group">
+      <label for="type">Type</label>
+      <!-- <input type="text" id="description" name="description" class="form-control" required ngModel #descriptionRef="ngModel"> -->
+      <select name="type" id="type" class="form-control" [(ngModel)]="itemToUpdate.type">
+        <option value="DISH">Dish</option>
+        <option value="DRINK">Drink</option>
+      </select>
+      <!-- <span class="help-block" *ngIf="!descriptionRef.valid && descriptionRef.touched">Description is required!</span> -->
+    </div>
+
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" class="form-control" required ngModel #quantityRef="ngModel" [(ngModel)]="itemToUpdate.quantity">
+      <span class="help-block" *ngIf="!quantityRef.valid && quantityRef.touched">Quantity is required!</span>
+    </div>
+
+    <div class="form-group">
+        <label for="restaurant">Restaurant</label>
+        <select name="restaurant" id="restaurant" class="form-control" [(ngModel)]="itemToUpdate.restaurantId">
+          <option *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.name}}</option>
+        </select>
+      </div>
+
+    <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!updateItemForm.valid">Sumbit</button>
+    <button class="btn btn-lg btn-danger btn-block" routerLink="/">Cancel</button>
+  </form>
+</div>
+
+<div class="col-lg-5" *ngIf="success">
+  <h2>You successfully updated the item!</h2>
+</div>

@@ -1,3 +1,4 @@
+import { NewRestaurantComponent } from './admin-panel/new-restaurant/new-restaurant.component';
 import { RestaurantsResolver } from './resolvers/restaurants.resolver';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
@@ -27,7 +28,15 @@ const routes: Routes = [
           items: ItemsResolver,
           restaurants: RestaurantsResolver
         }
+      },
+      {
+        path: 'restaurants',
+        component: NewRestaurantComponent,
+        resolve: {
+          allrestaurants: RestaurantsResolver
+        }
       }
+
     ]
   }
 

@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-lg-7">
+        <br>
+        <a class="list-group-item clearfix" *ngFor="let restaurant of restaurants | paginate: { itemsPerPage: 5, currentPage: p }">
+            <div class="pull-left">
+              <h4 class="list-group-item-heading">Restaurant name: <b>{{restaurant.name}}</b> <span *ngIf="restaurant.deleted" style="color: red">DELETED</span></h4>
+              <p class="list-group-item-text">Address: <b>{{restaurant.address}}</b></p>
+              <p class="list-group-item-text">Category: <b>{{restaurant.category}}</b></p>
+
+            </div>
+            <div class="pull-right">
+              <button class="btn btn-primary" (click)="updateRestaurant(restaurant)">Update</button>
+              <button class="btn btn-danger" (click)="deleteRestaurant(restaurant)" *ngIf="!restaurant.deleted">Delete</button>
+            </div>
+          </a>
+
+          <br>
+          <pagination-controls class="myPagination center" (pageChange)="p = $event"></pagination-controls>
+    </div>
+
+    <div class="col-g-5" *ngIf="updating">
+      <br>
+      <button class="btn btn-primary" (click)="updating = !updating">New restaurant</button>
+      <app-update-restaurant [restaurantToUpdate]="restaurantToUpdate"></app-update-restaurant>
+    </div>
+
+
+    <div class="col-lg-5" *ngIf="!updating">
+      <h3>Create new restaurant</h3>
+      <form #newRestaurantForm="ngForm" (ngSubmit)="onNewRestaurantFormSubmit(newRestaurantForm)" class="form-signin">
+        <div class="form-group">
+          <label for="name">Restaurant name</label>
+          <input type="text" id="name" name="name" class="form-control" required autofocus ngModel #nameRef="ngModel">
+          <span class="help-block" *ngIf="!nameRef.valid && nameRef.touched">Name is required!</span>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" name="address" class="form-control" required ngModel #addressRef="ngModel">
+          <span class="help-block" *ngIf="!addressRef.valid && addressRef.touched">Description is required!</span>
+        </div>
+
+
+        <div class="form-group">
+          <label for="category">Category</label>
+          <!-- <input type="text" id="description" name="description" class="form-control" required ngModel #descriptionRef="ngModel"> -->
+          <select name="category" id="category" class="form-control" [(ngModel)]="newRestaurant.category">
+            <option value="INDIAN">INDIAN</option>
+            <option value="PIZZA">PIZZA</option>
+            <option value="CHINEESE">CHINEESE</option>
+          </select>
+          <!-- <span class="help-block" *ngIf="!descriptionRef.valid && descriptionRef.touched">Description is required!</span> -->
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!newRestaurantForm.valid">Sumbit</button>
+        <button class="btn btn-lg btn-danger btn-block" routerLink="/">Cancel</button>
+      </form>
+    </div>
+  </div>

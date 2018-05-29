@@ -14,6 +14,8 @@ import { RestaurantView } from '../../models/restaurantView.model';
 export class NewItemComponent implements OnInit {
   items: ItemView[];
   restaurants: RestaurantView[];
+  updating: boolean;
+  itemToUpdate: ItemView;
 
   newItem: ItemCreation = new ItemCreation('', 0, '', '', 0, 0, false, 0);
 
@@ -36,13 +38,26 @@ export class NewItemComponent implements OnInit {
 
   deleteItem(item: ItemView) {
     this.itemsService.deleteItem(item).subscribe();
-    this.items = this.items.filter(i => i !== item);
+    this.refreshData();
+  }
+
+  updateItem(item: ItemView) {
+    this.itemToUpdate = item;
+    this.updating = true;
+  }
+
+  refreshData() {
+    this.itemsService.getAll().subscribe(
+      (data) => this.items = data
+    );
   }
 
   constructor(
     private route: ActivatedRoute,
     private itemsService: ItemsService
-  ) { }
+  ) {
+    this.updating = false;
+   }
 
   ngOnInit() {
     this.items = this.route.snapshot.data['items'];
