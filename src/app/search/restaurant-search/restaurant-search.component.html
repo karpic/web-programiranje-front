@@ -1,0 +1,32 @@
+<div class="row">
+  <br>
+  <h3>Search restaurants</h3>
+  <hr>
+  <div class="col-lg-3">
+    <div class="input-group">
+      <label for="name">Restaurant name</label>
+      <input type="text" name="name" id="name" class="form-control" [(ngModel)]="name">
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="input-group">
+      <label for="category">Restaurant category</label>
+      <input type="text" name="category" id="category" class="form-control" [(ngModel)]="category">
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <div class="input-group">
+      <label for="address">Restaurant address</label>
+      <input type="text" name="address" id="address" class="form-control" [(ngModel)]="address">
+    </div>
+  </div>
+  <div class="col-lg-3">
+    <br>
+    <button class="btn btn-default" (click)="searchRestaurants()">Search</button>
+  </div>
+</div>
+
+<div class="row">
+  <h4>Search results</h4>
+  <app-restaurant *ngFor="let restaurant of restaurants" [restaurant]="restaurant"></app-restaurant>
+</div>

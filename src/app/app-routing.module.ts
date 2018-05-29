@@ -1,3 +1,4 @@
+import { RestaurantSearchComponent } from './search/restaurant-search/restaurant-search.component';
 import { NewRestaurantComponent } from './admin-panel/new-restaurant/new-restaurant.component';
 import { RestaurantsResolver } from './resolvers/restaurants.resolver';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
@@ -12,10 +13,18 @@ import { NewItemComponent } from './admin-panel/new-item/new-item.component';
 import { ItemsResolver } from './resolvers/items.resolver';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { NewVehicleComponent } from './admin-panel/new-vehicle/new-vehicle.component';
+import { SearchComponent } from './search/search.component';
+import { ItemSearchComponent } from './search/item-search/item-search.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  {
+    path: 'search', component: SearchComponent, children: [
+      {path: 'items', component: ItemSearchComponent},
+      {path: 'restaurants', component: RestaurantSearchComponent}
+    ]
+  },
   {
     path: 'home',
     component: WelcomePageComponent,

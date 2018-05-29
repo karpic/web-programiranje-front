@@ -20,7 +20,7 @@ export class ItemsService {
   private urlTop = 'http://localhost:8080/webproject/webapi/items/top';
   private deleteUrl = 'http://localhost:8080/webproject/webapi/items/delete';
   private updateUrl = 'http://localhost:8080/webproject/webapi/items/update';
-
+  private searchUrl = 'http://localhost:8080/webproject/webapi/items/search?';
   getTopTen(): Observable<ItemView[]> {
     return this.http.get<ItemView[]>(this.urlTop, httpOptions).pipe(
       catchError(this.handleError<any>('getTopTen'))
@@ -36,6 +36,27 @@ export class ItemsService {
   getItemsForRestaurantId(id: number): Observable<ItemView[]> {
     return this.http.get<ItemView[]>(this.url + '/restaurant?id=' + id, httpOptions).pipe(
       catchError(this.handleError<any>('getItemsForRestaurantId'))
+    )
+  }
+
+  searchItems(name: string, price: string, type:string, restaurantName: string): Observable<ItemView[]>{
+    let url = this.searchUrl;
+
+    if(name !== ''){
+      url = url + 'name=' + name + '&';
+    }
+    if(price !== ''){
+      url = url + 'price=' + price + '&';
+    }
+    if(type !== ''){
+      url = url + 'type=' + type + '&';
+    }
+    if(restaurantName !== ''){
+      url = url + 'restaurant=' + restaurantName + '&';
+    }
+    console.log(url);
+    return this.http.get<ItemView[]>(url, httpOptions).pipe(
+      catchError(this.handleError<any>('searchItems'))
     )
   }
 

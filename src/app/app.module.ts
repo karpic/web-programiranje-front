@@ -31,6 +31,10 @@ import { VehiclesService } from './services/vehicles.service';
 import { VehiclesResolver } from './resolvers/vehicles.resolver';
 import { WelcomePageRestaurantNavigatorComponent } from './welcome-page/welcome-page-restaurant-navigator/welcome-page-restaurant-navigator.component';
 import { RestaurantComponent } from './welcome-page/welcome-page-restaurant-navigator/restaurant/restaurant.component';
+import { Interceptor } from './services/auth/interceptor';
+import { SearchComponent } from './search/search.component';
+import { ItemSearchComponent } from './search/item-search/item-search.component';
+import { RestaurantSearchComponent } from './search/restaurant-search/restaurant-search.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,9 @@ import { RestaurantComponent } from './welcome-page/welcome-page-restaurant-navi
     UpdateVehicleComponent,
     WelcomePageRestaurantNavigatorComponent,
     RestaurantComponent,
+    SearchComponent,
+    ItemSearchComponent,
+    RestaurantSearchComponent,
   ],
   imports: [
     FormsModule,
@@ -67,7 +74,12 @@ import { RestaurantComponent } from './welcome-page/welcome-page-restaurant-navi
     ItemsResolver,
     RestaurantsResolver,
     VehiclesService,
-    VehiclesResolver
+    VehiclesResolver,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi : true
+    }
   ],
   bootstrap: [AppComponent]
 })
