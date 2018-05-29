@@ -33,6 +33,12 @@ export class ItemsService {
     )
   }
 
+  getItemsForRestaurantId(id: number): Observable<ItemView[]> {
+    return this.http.get<ItemView[]>(this.url + '/restaurant?id=' + id, httpOptions).pipe(
+      catchError(this.handleError<any>('getItemsForRestaurantId'))
+    )
+  }
+
   insertItem(item: ItemCreation) {
     return this.http.post<ItemCreation>(this.url, item, httpOptions).pipe(
       catchError(this.handleError<ItemCreation>('insertItem'))

@@ -1,0 +1,53 @@
+<div class="col-lg-5" *ngIf="!success">
+    <h3>Create new restaurant</h3>
+    <form #updateVehicleForm="ngForm" (ngSubmit)="onUpdateVehicleForm(updateVehicleForm)" class="form-signin">
+      <div class="form-group">
+        <label for="brand">Vehicle brand</label>
+        <input type="text" id="brand" name="brand" class="form-control" required autofocus ngModel #brandRef="ngModel" [(ngModel)]="vehicleToUpdate.brand">
+        <span class="help-block" *ngIf="!brandRef.valid && brandRef.touched">Brand is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="model">Model</label>
+        <input type="text" id="model" name="model" class="form-control" required ngModel #modelRef="ngModel" [(ngModel)]="vehicleToUpdate.model">
+        <span class="help-block" *ngIf="!modelRef.valid && modelRef.touched">Model is required!</span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <!-- <input type="text" id="description" name="description" class="form-control" required ngModel #descriptionRef="ngModel"> -->
+        <select name="type" id="type" class="form-control" [(ngModel)]="vehicleToUpdate.type">
+          <option value="CAR">CAR</option>
+          <option value="SCHOOTER">SCHOOTER</option>
+          <option value="BICYCLE">BICYCLE</option>
+        </select>
+        <!-- <span class="help-block" *ngIf="!descriptionRef.valid && descriptionRef.touched">Description is required!</span> -->
+      </div>
+
+      <div class="form-group">
+        <label for="regNum">Registraion number</label>
+        <input type="text" id="regNum" name="regNum" class="form-control" required ngModel #regNumRef="ngModel" [(ngModel)]="vehicleToUpdate.registrationNumber">
+        <span class="help-block" *ngIf="!regNumRef.valid && regNumRef.touched">Registraion number is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="prodyear">Production year</label>
+        <input type="text" id="prodyear" name="prodyear" class="form-control" required ngModel #prodyearRef="ngModel" [(ngModel)]="vehicleToUpdate.productionYear">
+        <span class="help-block" *ngIf="!prodyearRef.valid && prodyearRef.touched">Production year number is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="note">Note</label>
+        <input type="text" id="note" name="note" class="form-control" required ngModel #noteRef="ngModel" [(ngModel)]="vehicleToUpdate.note">
+        <span class="help-block" *ngIf="!noteRef.valid && noteRef.touched">Note number is required!</span>
+      </div>
+
+      <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!updateVehicleForm.valid">Sumbit</button>
+      <button class="btn btn-lg btn-danger btn-block" routerLink="/">Cancel</button>
+    </form>
+  </div>
+
+  <div class="col-lg-5" *ngIf="success">
+      <h2>You successfully updated the vehicle!</h2>
+    </div>

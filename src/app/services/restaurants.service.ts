@@ -27,6 +27,12 @@ export class RestaurantsService {
     )
   }
 
+  getRestaurantsByCategory(category: string): Observable<RestaurantView[]> {
+    return this.http.get<RestaurantView[]>(this.url + '/category?category=' + category , httpOptions).pipe(
+      catchError(this.handleError<any>('getRestaurantsByCategory'))
+    )
+  }
+
   insertRestaurant(restaurant: RestaurantCreation): Observable<RestaurantCreation> {
     return this.http.post<RestaurantCreation>(this.url, restaurant, httpOptions).pipe(
       catchError(this.handleError<RestaurantCreation>('insertRestaurant'))

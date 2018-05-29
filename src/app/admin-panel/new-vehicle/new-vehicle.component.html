@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-lg-7">
+    <br>
+    <a class="list-group-item clearfix" *ngFor="let vehicle of vehicles | paginate: { itemsPerPage: 5, currentPage: p }">
+      <div class="pull-left">
+        <h4 class="list-group-item-heading">Brand name:
+          <b>{{vehicle.brand}}</b>
+          <span *ngIf="vehicle.deleted" style="color: red">DELETED</span>
+        </h4>
+        <p class="list-group-item-text">Model:
+          <b>{{vehicle.model}}</b>
+        </p>
+        <p class="list-group-item-text">Type:
+          <b>{{vehicle.type}}</b>
+        </p>
+        <p class="list-group-item-text">Registraion number:
+          <b>{{vehicle.registrationNumber}}</b>
+        </p>
+        <p class="list-group-item-text">Production year:
+          <b>{{vehicle.productionYear}}</b>
+        </p>
+        <p class="list-group-item-text">note:
+          <b>{{vehicle.note}}</b>
+        </p>
+
+      </div>
+      <div class="pull-right">
+        <button class="btn btn-primary" (click)="updateVehicle(vehicle)">Update</button>
+        <button class="btn btn-danger" (click)="deleteVehicle(vehicle)" *ngIf="!vehicle.deleted">Delete</button>
+      </div>
+    </a>
+
+    <br>
+    <pagination-controls class="myPagination center" (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+  <div class="col-g-5" *ngIf="updating">
+    <br>
+    <button class="btn btn-primary" (click)="updating = !updating">New vehicle</button>
+    <app-update-vehicle [vehicleToUpdate]="vehicleToUpdate"></app-update-vehicle>
+  </div>
+
+
+  <div class="col-lg-5" *ngIf="!updating">
+    <h3>Create new restaurant</h3>
+    <form #newVehicleForm="ngForm" (ngSubmit)="onVehicleFormSubmit(newVehicleForm)" class="form-signin">
+      <div class="form-group">
+        <label for="brand">Vehicle brand</label>
+        <input type="text" id="brand" name="brand" class="form-control" required autofocus ngModel #brandRef="ngModel">
+        <span class="help-block" *ngIf="!brandRef.valid && brandRef.touched">Brand is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="model">Model</label>
+        <input type="text" id="model" name="model" class="form-control" required ngModel #modelRef="ngModel">
+        <span class="help-block" *ngIf="!modelRef.valid && modelRef.touched">Model is required!</span>
+      </div>
+
+
+      <div class="form-group">
+        <label for="type">Type</label>
+        <!-- <input type="text" id="description" name="description" class="form-control" required ngModel #descriptionRef="ngModel"> -->
+        <select name="type" id="type" class="form-control" [(ngModel)]="newVehicle.type">
+          <option value="CAR">CAR</option>
+          <option value="SCHOOTER">SCHOOTER</option>
+          <option value="BICYCLE">BICYCLE</option>
+        </select>
+        <!-- <span class="help-block" *ngIf="!descriptionRef.valid && descriptionRef.touched">Description is required!</span> -->
+      </div>
+
+      <div class="form-group">
+        <label for="regNum">Registraion number</label>
+        <input type="text" id="regNum" name="regNum" class="form-control" required ngModel #regNumRef="ngModel">
+        <span class="help-block" *ngIf="!regNumRef.valid && regNumRef.touched">Registraion number is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="prodyear">Production year</label>
+        <input type="text" id="prodyear" name="prodyear" class="form-control" required ngModel #prodyearRef="ngModel">
+        <span class="help-block" *ngIf="!prodyearRef.valid && prodyearRef.touched">Production year number is required!</span>
+      </div>
+
+      <div class="form-group">
+        <label for="note">Note</label>
+        <input type="text" id="note" name="note" class="form-control" required ngModel #noteRef="ngModel">
+        <span class="help-block" *ngIf="!noteRef.valid && noteRef.touched">Note number is required!</span>
+      </div>
+
+      <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="!newVehicleForm.valid">Sumbit</button>
+      <button class="btn btn-lg btn-danger btn-block" routerLink="/">Cancel</button>
+    </form>
+  </div>
+</div>

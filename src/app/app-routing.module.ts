@@ -10,6 +10,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { TopTenItemsResolver } from './resolvers/topTenItems.resolver';
 import { NewItemComponent } from './admin-panel/new-item/new-item.component';
 import { ItemsResolver } from './resolvers/items.resolver';
+import { VehiclesResolver } from './resolvers/vehicles.resolver';
+import { NewVehicleComponent } from './admin-panel/new-vehicle/new-vehicle.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,8 +37,14 @@ const routes: Routes = [
         resolve: {
           allrestaurants: RestaurantsResolver
         }
+      },
+      {
+        path: 'vehicles',
+        component: NewVehicleComponent,
+        resolve: {
+          vehicles: VehiclesResolver
+        }
       }
-
     ]
   }
 

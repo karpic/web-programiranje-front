@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h3>Browse restaurants by category</h3>
+    <select name="category" id="category" class="form-control">
+      <option value="chineese" #chineeseRef (click)="updateRestaurants(chineeseRef.value)">Chineese</option>
+      <option value="indian" #indianRef (click)="updateRestaurants(indianRef.value)">Indian</option>
+      <option value="pizza" #pizzaRef (click)="updateRestaurants(pizzaRef.value)">Pizza</option>
+    </select>
+
+    <hr>
+    <br>
+
+    <app-restaurant *ngFor="let restaurant of restaurants" [restaurant]="restaurant"></app-restaurant>
+
+  </div>
+</div>

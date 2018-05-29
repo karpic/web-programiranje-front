@@ -25,6 +25,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { UpdateItemComponent } from './admin-panel/update-item/update-item.component';
 import { NewRestaurantComponent } from './admin-panel/new-restaurant/new-restaurant.component';
 import { UpdateRestaurantComponent } from './admin-panel/update-restaurant/update-restaurant.component';
+import { NewVehicleComponent } from './admin-panel/new-vehicle/new-vehicle.component';
+import { UpdateVehicleComponent } from './admin-panel/update-vehicle/update-vehicle.component';
+import { VehiclesService } from './services/vehicles.service';
+import { VehiclesResolver } from './resolvers/vehicles.resolver';
+import { WelcomePageRestaurantNavigatorComponent } from './welcome-page/welcome-page-restaurant-navigator/welcome-page-restaurant-navigator.component';
+import { RestaurantComponent } from './welcome-page/welcome-page-restaurant-navigator/restaurant/restaurant.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +45,10 @@ import { UpdateRestaurantComponent } from './admin-panel/update-restaurant/updat
     UpdateItemComponent,
     NewRestaurantComponent,
     UpdateRestaurantComponent,
+    NewVehicleComponent,
+    UpdateVehicleComponent,
+    WelcomePageRestaurantNavigatorComponent,
+    RestaurantComponent,
   ],
   imports: [
     FormsModule,
@@ -55,7 +65,9 @@ import { UpdateRestaurantComponent } from './admin-panel/update-restaurant/updat
     ItemsService,
     RestaurantsService,
     ItemsResolver,
-    RestaurantsResolver
+    RestaurantsResolver,
+    VehiclesService,
+    VehiclesResolver
   ],
   bootstrap: [AppComponent]
 })
