@@ -1,3 +1,4 @@
+import { RestaurantsService } from './../../../services/restaurants.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { RestaurantView } from '../../../models/restaurantView.model';
 import { ItemsService } from '../../../services/items.service';
@@ -20,8 +21,13 @@ export class RestaurantComponent implements OnInit {
     this.showItems = true;
   }
 
+  save() {
+    this.restaurantService.saveRestaurant(this.restaurant).subscribe();
+  }
+
   constructor(
-    private itemService: ItemsService
+    private itemService: ItemsService,
+    private restaurantService: RestaurantsService
   ) {
     this.showItems = false;
    }

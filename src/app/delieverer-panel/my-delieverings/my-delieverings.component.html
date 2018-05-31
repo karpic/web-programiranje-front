@@ -1,0 +1,15 @@
+<a class="list-group-item clearfix" *ngFor="let order of myDelieverings">
+  <div class="pull-left">
+    <h4 class="list-group-item-heading">Order <span *ngIf="order.deleted" style="color: red">DELETED</span></h4>
+    <p class="list-group-item-text">Date ordered: <b>{{order.dateOrdered | date}}</b></p>
+    <p class="list-group-item-text">Status: <b>{{order.status}}</b></p>
+    <p class="list-group-item-text">Note: <b>{{order.note}}</b></p>
+
+    <h5>Order items</h5>
+      <div *ngFor="let orderItem of order.orderItems">
+    </div>
+  </div>
+  <div class="pull-right">
+    <button class="btn btn-default" (click)="deliever(order)">Delievered</button>
+  </div>
+</a>

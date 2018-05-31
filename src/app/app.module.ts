@@ -1,3 +1,4 @@
+import { OrderService } from './services/order.serrvice';
 import { TopTenItemsResolver } from './resolvers/topTenItems.resolver';
 import { TokenStorage } from './services/auth/token.storage';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,6 +36,13 @@ import { Interceptor } from './services/auth/interceptor';
 import { SearchComponent } from './search/search.component';
 import { ItemSearchComponent } from './search/item-search/item-search.component';
 import { RestaurantSearchComponent } from './search/restaurant-search/restaurant-search.component';
+import { OrderComponent } from './order/order.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserOrdersComponent } from './user-profile/user-orders/user-orders.component';
+import { UserRestaurantsComponent } from './user-profile/user-restaurants/user-restaurants.component';
+import { DelievererPanelComponent } from './delieverer-panel/delieverer-panel.component';
+import { AllOrdersComponent } from './delieverer-panel/all-orders/all-orders.component';
+import { MyDelieveringsComponent } from './delieverer-panel/my-delieverings/my-delieverings.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +64,13 @@ import { RestaurantSearchComponent } from './search/restaurant-search/restaurant
     SearchComponent,
     ItemSearchComponent,
     RestaurantSearchComponent,
+    OrderComponent,
+    UserProfileComponent,
+    UserOrdersComponent,
+    UserRestaurantsComponent,
+    DelievererPanelComponent,
+    AllOrdersComponent,
+    MyDelieveringsComponent,
   ],
   imports: [
     FormsModule,
@@ -79,7 +94,8 @@ import { RestaurantSearchComponent } from './search/restaurant-search/restaurant
       provide: HTTP_INTERCEPTORS,
       useClass: Interceptor,
       multi : true
-    }
+    },
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

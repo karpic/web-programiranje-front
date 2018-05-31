@@ -20,6 +20,7 @@ export class RestaurantsService {
   private deleteUrl = 'http://localhost:8080/webproject/webapi/restaurants/delete';
   private updateUrl = 'http://localhost:8080/webproject/webapi/restaurants/update';
   private searchUrl = 'http://localhost:8080/webproject/webapi/restaurants/search?';
+  private savedUrl = 'http://localhost:8080/webproject/webapi/restaurants/saved';
 
 
   getRestaurants(): Observable<RestaurantView[]> {
@@ -31,6 +32,24 @@ export class RestaurantsService {
   getRestaurantsByCategory(category: string): Observable<RestaurantView[]> {
     return this.http.get<RestaurantView[]>(this.url + '/category?category=' + category , httpOptions).pipe(
       catchError(this.handleError<any>('getRestaurantsByCategory'))
+    )
+  }
+
+  getRestaurantById(id: number): Observable<RestaurantView> {
+    return this.http.get(this.url+'/id/'+id, httpOptions).pipe(
+      catchError(this.handleError<any>('getRestaurantById'))
+    )
+  }
+
+  saveRestaurant(restaurant: RestaurantView): Observable<RestaurantView>{
+    return this.http.post<RestaurantView>(this.url + '/save?id='+ restaurant.id, httpOptions).pipe(
+      catchError(this.handleError<RestaurantView>('saveRestaurant'))
+    );
+  }
+
+  getSavedRestaurants(): Observable<RestaurantView[]> {
+    return this.http.get<RestaurantView[]>(this.savedUrl, httpOptions).pipe(
+      catchError(this.handleError<any>('getSavedRestaurants'))
     )
   }
 

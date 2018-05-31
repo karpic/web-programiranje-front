@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="allorders">All orders</a>
+        </li>
+        <li role="presentation" routerLinkActive="active" data-toggle="tab">
+          <a routerLink="mydelieveries">Delievering</a>
+        </li>
+        <!-- <li role="presentation" routerLinkActive="active">
+          <a routerLink="vehicles">Vehicles</a>
+        </li> -->
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

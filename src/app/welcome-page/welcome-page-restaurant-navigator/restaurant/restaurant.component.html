@@ -17,6 +17,12 @@
       <button class="btn btn-default" (click)="updateItems()">View items
         <i class="glyphicon glyphicon-chevron-down"></i>
       </button>
+      <button class="btn btn-default" [routerLink]="['/order/'+ restaurant.id]">Order
+        <i class="glyphicon glyphicon-plus"></i>
+      </button>
+      <button class="btn btn-default" (click)="save()">Save
+        <i class="glyphicon glyphicon-heart"></i>
+      </button>
     </div>
   </a>
 </div>

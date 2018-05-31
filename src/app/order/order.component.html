@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h3>Order from restaurant: {{restaurant.name}}</h3>
+    <hr>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-8">
+    <h3>Items from this restaurant</h3>
+    <div *ngFor="let item of items">
+      <a class="list-group-item clearfix">
+        <div class="pull-left">
+          <h4 class="list-group-item-heading">Item name: <b>{{item.name}}</b></h4>
+          <p class="list-group-item-text">Description: <b>{{item.description}}</b></p>
+          <p class="list-group-item-text">Price: <b>{{item.price}}</b></p>
+        </div>
+
+        <div class="pull-right">
+            <input type="number" placeholder="Quantity..."  class="form-control" #quantityRef>
+          <button class="btn btn-default" (click)="addOrderItem(item, quantityRef.value)"> <i class="glyphicon glyphicon-plus"></i> Add</button>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <h4>Order preview</h4>
+    <div *ngFor="let s of orderPreview.forEach">
+      <p>{{s}}</p>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-lg-12">
+      <textarea name="note" id="note" rows="10" placeholder="Note..." [(ngModel)]="newOrder.note"></textarea>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <button class="btn btn-primary" (click)="submitOrder()">Order</button>
+  </div>
+</div>
